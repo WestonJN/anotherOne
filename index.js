@@ -1,6 +1,3 @@
-var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "landscape" });
-doc.table(1, 1, generateData(100), headers, { autoSize: true });
-  
 // Don't forget, that there are CORS-Restrictions. So if you want to run it without a Server in your Browser you need to transform the image to a dataURL
 // Use http://dataurl.net/#dataurlmaker
 var doc = new jsPDF();
@@ -54,47 +51,45 @@ doc.setFont('Gill Sans Nova');
 doc.setTextColor(51, 51, 51);
 doc.text(15, 127, 'Overdue Clients');
 
-
-{/* <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
-
 var generateData = function(amount) {
-    var result = [];
-    var data = {
-      coin: "100",
-      game_group: "GameGroup",
-      game_name: "XPTO2",
-      game_version: "25",
-      machine: "20485861",
-      vlt: "0"
-    };
-    for (var i = 0; i < amount; i += 1) {
-      data.id = (i + 1).toString();
-      result.push(Object.assign({}, data));
-    }
-    return result;
+  var result = [];
+  var data = {
+    Client_name: "Andy Sekoto",
+    Company: "DHET",
+    Allocated_Staff_Member: "Jane Doe",
+    Silence_Duration: "40",
+    Client_Status: "Overdue"
+    
   };
-  
-  function createHeaders(keys) {
-    var result = [];
-    for (var i = 0; i < keys.length; i += 1) {
-      result.push({
-        id: keys[i],
-        name: keys[i],
-        prompt: keys[i],
-        width: 65,
-        align: "center",
-        padding: 0
-      });
-    }
-    return result;
+  for (var i = 0; i < amount; i += 1) {
+    data.id = (i + 1).toString();
+    result.push(Object.assign({}, data));
   }
+  return result;
+};
+
+function createHeaders(keys) {
+  var result = [];
+  for (var i = 0; i < keys.length; i += 1) {
+    result.push({
+      id: keys[i],
+      name: keys[i],
+      prompt: keys[i],
+      width: 80,
+      align: "center",
+      padding: 30
+    });
+  }
+  return result;
+}
+
+var headers = createHeaders([
+  "Client_name",
+  "Company",
+  "Allocated_Staff_Member",
+  "Silence_Duration",
+  "Client_Status"
   
-  var headers = createHeaders([
-    "id",
-    "coin",
-    "game_group",
-    "game_name",
-    "game_version",
-    "machine",
-    "vlt"
-  ]); */}
+]);
+
+doc.table(15, 130, generateData(4), headers, { autoSize: true });
